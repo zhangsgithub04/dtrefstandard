@@ -16,8 +16,8 @@
 
     async load() {
       const baseUrl =
-        this.getAttribute("base-url") || "https://your-api.onrender.com";
-      const apiKey = this.getAttribute("api-key") || "";
+        this.getAttribute("base-url") || "https://dtrefstandard.onrender.com";
+      const apiKey = this.getAttribute("api-key") || "oneontacs";
       const symbol = this.getAttribute("symbol");
       const version = this.getAttribute("version");
       const latest = this.hasAttribute("latest");
@@ -71,6 +71,7 @@
 
     getShowFields() {
       const raw = this.getAttribute("show");
+
       if (!raw) {
         return [
           "standardname",
@@ -80,7 +81,6 @@
           "standard_date",
           "description",
           "longdescription",
-          "citation",
           "url"
         ];
       }
@@ -102,16 +102,6 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#39;");
-    }
-
-    formatCitation(data) {
-      const org = data.organization || "";
-      const name = data.standardname || data.symbol || "";
-      const version = data.version ? ` ${data.version}` : "";
-      const date = data.standard_date || "";
-      const url = data.url || "";
-
-      return `${org}. ${name}${version}. ${date}. ${url}`.trim();
     }
 
     renderRow(label, value) {
@@ -164,10 +154,6 @@
         ? this.renderBlock("Long Description", data.longdescription)
         : "";
 
-      const citationHtml = this.hasField("citation")
-        ? this.renderBlock("Citation", this.formatCitation(data))
-        : "";
-
       const urlHtml =
         this.hasField("url") && data.url
           ? `<div style="margin-top:12px;">
@@ -183,7 +169,6 @@
           ${dateHtml}
           ${descriptionHtml}
           ${longDescriptionHtml}
-          ${citationHtml}
           ${urlHtml}
         </div>
       `;
