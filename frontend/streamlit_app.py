@@ -22,7 +22,7 @@ def api_headers():
         "Content-Type": "application/json",
     }
 
-
+```
 def handle_response(response):
     try:
         data = response.json()
@@ -33,7 +33,24 @@ def handle_response(response):
         raise Exception(data)
 
     return data
+```
+def handle_response(response):
+    content_type = response.headers.get("content-type", "")
 
+    if not response.ok:
+        if "application/json" in content_type:
+            try:
+                data = response.json()
+                raise Exception(data)
+            except Exception:
+                raise Exception(f"API error: {response.status_code}")
+        else:
+            raise Exception(f"API error: {response.status_code}")
+
+    if "application/json" in content_type:
+        return response.json()
+
+    raise Exception("API did not return JSON")
 
 def get_all_standards():
     r = requests.get(
