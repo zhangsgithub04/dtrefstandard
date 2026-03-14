@@ -56,7 +56,7 @@ def require_api_key(x_api_key: str = Header(..., alias="X-API-Key")):
 class StandardCreate(BaseModel):
     symbol: str = Field(..., min_length=1, max_length=50)
     standardname: str = Field(..., min_length=1, max_length=200)
-    version: Optional[float] = None
+    version: Optional[str] = None
     standard_date: Optional[date] = None
     description: Optional[str] = None
     longdescription: Optional[str] = None
@@ -67,7 +67,7 @@ class StandardCreate(BaseModel):
 class StandardUpdate(BaseModel):
     symbol: Optional[str] = Field(None, min_length=1, max_length=50)
     standardname: Optional[str] = Field(None, min_length=1, max_length=200)
-    version: Optional[float] = None
+    version: Optional[str] = None
     standard_date: Optional[date] = None
     description: Optional[str] = None
     longdescription: Optional[str] = None
@@ -156,7 +156,7 @@ async def get_latest_standard_by_symbol(
 @app.get("/standards/by-symbol/{symbol}/{version}")
 async def get_standard_by_symbol_version(
     symbol: str,
-    version: float,
+    version: str,
     api_key: str = Depends(require_api_key),
 ):
     response = (
