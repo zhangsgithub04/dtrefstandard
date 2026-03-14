@@ -22,7 +22,7 @@ def api_headers():
         "Content-Type": "application/json",
     }
 
-```
+'''
 def handle_response(response):
     try:
         data = response.json()
@@ -32,8 +32,8 @@ def handle_response(response):
     if not response.ok:
         raise Exception(data)
 
-    return data
-```
+return data
+'''
 def handle_response(response):
     content_type = response.headers.get("content-type", "")
 
@@ -156,12 +156,15 @@ def to_float_or_none(value):
         return None
     return float(value)
 
+def clean_version(value):
+    value = value.strip()
+    return value if value else None
 
 def build_full_payload(symbol, standardname, version, standard_date, description, longdescription, url, organization):
     return {
         "symbol": symbol.strip(),
         "standardname": standardname.strip(),
-        "version": to_float_or_none(version),
+        "version": clean_version(version),
         "standard_date": clean_optional(standard_date),
         "description": clean_optional(description),
         "longdescription": clean_optional(longdescription),
