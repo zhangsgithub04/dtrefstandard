@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sentence Style Standard Reference</title>
+<script defer src="https://zhangsgithub04.github.io/dtrefstandard/standard-ref-v3.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.8;
+      font-size: 20px;
+    }
+    p {
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    The latest WCAG is
+    <standard-ref symbol="WCAG" latest show="version" display="inline"></standard-ref>
+    published by
+    <standard-ref symbol="WCAG" latest show="organization" display="inline"></standard-ref>
+    on
+    <standard-ref symbol="WCAG" latest show="standard_date" display="inline"></standard-ref>.
+  </p>
+
+  <p>
+    Short description:
+    <standard-ref symbol="WCAG" latest show="description" display="inline"></standard-ref>
+  </p>
+
+  <p>
+    Long description:
+    <standard-ref symbol="WCAG" latest show="longdescription" display="inline"></standard-ref>
+  </p>
+
+  <p>
+    Official URL:
+    <standard-ref symbol="WCAG" latest show="url" display="inline"></standard-ref>
+  </p>
+
+  <p>
+    Combined:
+    <standard-ref
+      symbol="WCAG"
+      latest
+      show="standardname,version,organization,standard_date"
+      display="inline">
+    </standard-ref>
+  </p>
+</body>
+</html>
