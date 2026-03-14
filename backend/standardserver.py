@@ -131,6 +131,26 @@ async def list_standards_by_symbol(symbol: str, api_key: str = Depends(require_a
 
     return response.data
 
+@app.get("/standards/latest/{symbol}")
+async def get_latest_standard_by_symbol(
+    symbol: str,
+    api_key: str = Depends(require_api_key),
+):
+    response = (
+        supabase
+        .table("standard")
+        .select("*")
+        .eq("symbol", symbol)
+        .order("version", desc=True)
+        .limit(1)
+        .execute()
+    )
+
+    if not response.data:
+        raise HTTPException(status_code=404, detail="Standard not found")
+
+    return response.data[0]
+    
 
 @app.get("/standards/by-symbol/{symbol}/{version}")
 async def get_standard_by_symbol_version(
