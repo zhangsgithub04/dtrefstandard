@@ -14,6 +14,7 @@ app.add_middleware(
         "http://127.0.0.1:5500",
         "http://localhost:5500",
         "https://dtrefstandard-ui.onrender.com",
+        "https://balex124.github.io",
         "https://zhangsgithub04.github.io",
     ],
     allow_credentials=False,
