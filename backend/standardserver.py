@@ -85,7 +85,8 @@ async def root():
 
 
 @app.get("/standards")
-async def list_standards(api_key: str = Depends(require_api_key)):
+#async def list_standards(api_key: str = Depends(require_api_key)):
+async def list_standards():
     response = (
         supabase
         .table("standard")
@@ -98,13 +99,15 @@ async def list_standards(api_key: str = Depends(require_api_key)):
 
 
 @app.get("/standards/count")
-async def count_standards(api_key: str = Depends(require_api_key)):
+#async def count_standards(api_key: str = Depends(require_api_key)):
+async def count_standards():
     response = supabase.table("standard").select("*", count="exact").execute()
     return {"count": response.count}
 
 
 @app.get("/standards/{standard_id}")
-async def get_standard(standard_id: int, api_key: str = Depends(require_api_key)):
+#async def get_standard(standard_id: int, api_key: str = Depends(require_api_key)):
+async def get_standard(standard_id: int):
     response = (
         supabase
         .table("standard")
@@ -120,7 +123,8 @@ async def get_standard(standard_id: int, api_key: str = Depends(require_api_key)
 
 
 @app.get("/standards/by-symbol/{symbol}")
-async def list_standards_by_symbol(symbol: str, api_key: str = Depends(require_api_key)):
+#async def list_standards_by_symbol(symbol: str, api_key: str = Depends(require_api_key)):
+async def list_standards_by_symbol(symbol: str):
     response = (
         supabase
         .table("standard")
@@ -133,10 +137,8 @@ async def list_standards_by_symbol(symbol: str, api_key: str = Depends(require_a
     return response.data
 
 @app.get("/standards/latest/{symbol}")
-async def get_latest_standard_by_symbol(
-    symbol: str,
-    api_key: str = Depends(require_api_key),
-):
+#async def get_latest_standard_by_symbol(symbol: str,api_key: str = Depends(require_api_key),):
+async def get_latest_standard_by_symbol(symbol: str):
     response = (
         supabase
         .table("standard")
@@ -154,11 +156,8 @@ async def get_latest_standard_by_symbol(
     
 
 @app.get("/standards/by-symbol/{symbol}/{version}")
-async def get_standard_by_symbol_version(
-    symbol: str,
-    version: str,
-    api_key: str = Depends(require_api_key),
-):
+#async def get_standard_by_symbol_version(symbol: str,version: str,api_key: str = Depends(require_api_key)):
+async def get_standard_by_symbol_version(symbol: str,version: str):
     response = (
         supabase
         .table("standard")
